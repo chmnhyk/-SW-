@@ -1,0 +1,38 @@
+@startuml
+title 항공권 예약 Sequence Diagram
+
+actor 고객
+participant "항공예약시스템" as System
+participant "항공사DB" as DB
+participant "결제시스템" as Payment
+
+== 예약 요청 ==
+고객 -> System: 항공권 검색(출발지, 도착지, 날짜)
+System -> DB: 항공편 목록 조회
+DB --> System: 항공편 목록 반환
+System --> 고객: 항공편 목록 표시
+
+== 항공편 선택 ==
+고객 -> System: 항공편 선택(항공편번호)
+System -> DB: 좌석정보 확인
+DB --> System: 좌석정보 반환
+System --> 고객: 좌석정보 표시
+
+== 예약 정보 입력 ==
+고객 -> System: 탑승객 정보 입력
+System -> DB: 예약정보 임시저장
+
+== 결제 처리 ==
+고객 -> System: 결제요청(카드정보)
+System -> Payment: 결제승인 요청
+Payment --> System: 결제승인 결과(성공)
+System -> DB: 결제상태 업데이트
+
+== 예약 확정 ==
+System --> 고객: 예약확인서 발송(이메일)
+System -> DB: 예약정보 최종저장
+DB --> System: 저장 완료
+
+== 완료 ==
+고객 <-- System: 항공권 예약 완료 메시지
+@enduml
