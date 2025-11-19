@@ -1,0 +1,44 @@
+@startuml
+title 헬스 회원 관리 시스템 – Use Case Diagram
+
+actor 회원
+actor 트레이너
+actor 관리자
+
+rectangle "헬스 회원 관리 시스템" {
+
+    (회원 등록) as UC1
+    (회원 정보 수정) as UC2
+    (회원권 구매) as UC3
+    (출석 체크) as UC4
+    (결제 처리) as UC5
+    (환불 처리) as UC6
+
+    (트레이너 등록) as UC7
+    (트레이너 스케줄 관리) as UC8
+    (PT 예약) as UC9
+    (PT 예약 취소) as UC10
+
+    (회원권 관리) as UC11
+    (회원 관리) as UC12
+}
+
+회원 --> UC1
+회원 --> UC2
+회원 --> UC3
+회원 --> UC4
+회원 --> UC9
+회원 --> UC10
+
+트레이너 --> UC8
+
+관리자 --> UC5
+관리자 --> UC6
+관리자 --> UC7
+관리자 --> UC11
+관리자 --> UC12
+
+UC3 --> UC5 : <<include>>
+UC9 --> UC8 : <<include>>
+
+@enduml
