@@ -1,0 +1,25 @@
+@startuml
+title 헬스장 회원 관리 시스템 - Sequence Diagram (입장 처리)
+
+actor MemberUser as Member
+participant "관리자 시스템" as AdminSystem
+participant "회원 관리" as MemberService
+participant "이용권 관리" as PassService
+participant "출입기록 관리" as EntryService
+
+Member -> AdminSystem: 회원 방문
+AdminSystem -> MemberService: 회원 조회(memberId)
+MemberService --> AdminSystem: 회원 정보 반환
+
+AdminSystem -> PassService: 이용권 상태 확인
+PassService --> AdminSystem: 유효(Valid) / 만료(Expired)
+
+alt 이용권 유효
+    AdminSystem -> EntryService: 입장 기록 저장
+    EntryService --> AdminSystem: 저장 성공
+    AdminSystem --> Member: 입장 허용
+else 이용권 만료
+    AdminSystem --> Member: 입장 불가(이용권 만료)
+end
+
+@enduml

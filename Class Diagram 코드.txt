@@ -1,0 +1,50 @@
+@startuml
+title 헬스장 회원 관리 시스템 - Class Diagram
+
+class Member {
+    - memberId : int
+    - name : string
+    - phone : string
+    - joinDate : date
+    - passId : int
+    + register()
+    + updateInfo()
+    + getInfo()
+}
+
+class Pass {
+    - passId : int
+    - type : string
+    - startDate : date
+    - endDate : date
+    - price : int
+    + activate()
+    + renew()
+    + checkExpiration()
+}
+
+class Entry {
+    - entryId : int
+    - memberId : int
+    - checkInTime : datetime
+    - checkOutTime : datetime
+    + recordCheckIn()
+    + recordCheckOut()
+}
+
+class Payment {
+    - paymentId : int
+    - memberId : int
+    - amount : int
+    - paymentDate : date
+    - method : string
+    + processPayment()
+    + getPaymentHistory()
+}
+
+Member "1" -- "0..*" Entry : creates >
+Member "1" -- "0..*" Payment : pays >
+Member "1" -- "1" Pass : owns >
+Pass "1" -- "0..*" Entry : validates >
+
+@enduml
