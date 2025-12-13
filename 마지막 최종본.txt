@@ -1,0 +1,113 @@
+@startuml
+title 헬스장 회원 관리 시스템 - ER Diagram
+
+entity Member {
+    *member_id : int
+    --
+    name : string
+    phone : string
+    join_date : date
+}
+
+entity Pass {
+    *pass_id : int
+    --
+    type : string
+    start_date : date
+    end_date : date
+    price : int
+}
+
+entity Entry {
+    *entry_id : int
+    --
+    check_in_time : datetime
+    check_out_time : datetime
+}
+
+entity Payment {
+    *payment_id : int
+    --
+    amount : int
+    payment_date : date
+    payment_method : string
+}
+
+Member ||--|| Pass : owns
+Member ||--o{ Entry : records
+Member ||--o{ Payment : makes
+
+@enduml
+
+
+[헬스장 회원 관리 시스템 - UI 설계]
+
+1. 메인 화면 (관리자)
+--------------------------------
+- 회원 관리
+- 이용권 관리
+- 출입 관리
+- 결제 관리
+- 로그아웃
+
+2. 회원 관리 화면
+--------------------------------
+[입력 항목]
+- 회원 ID
+- 이름
+- 전화번호
+- 가입일
+
+[기능 버튼]
+- 회원 등록
+- 회원 정보 수정
+- 회원 삭제
+- 회원 조회
+
+3. 이용권 관리 화면
+--------------------------------
+[입력 항목]
+- 이용권 종류
+- 시작일
+- 종료일
+- 이용 요금
+
+[기능 버튼]
+- 이용권 등록
+- 이용권 갱신
+- 이용권 상태 확인
+
+4. 출입 관리 화면
+--------------------------------
+[표시 정보]
+- 회원 ID
+- 입장 시간
+- 퇴장 시간
+
+[기능 버튼]
+- 입장 기록
+- 퇴장 기록
+- 출입 내역 조회
+
+5. 결제 관리 화면
+--------------------------------
+[입력 항목]
+- 회원 ID
+- 결제 금액
+- 결제 수단
+
+[기능 버튼]
+- 결제 처리
+- 결제 내역 조회
+
+/health-gym-management/
+├── usecase_diagram.puml
+├── class_diagram.puml
+├── sequence_diagram.puml
+├── erd_diagram.puml
+├── ER_Diagram_Gym.png
+├── UI_Design_Gym.png
+├── 헬스장_회원관리_최종보고서.docx
+└── README.md
+
+
